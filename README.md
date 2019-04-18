@@ -45,4 +45,4 @@ Your new extension version can be released using `gem-release` like this:
 bundle exec gem bump -v VERSION --tag --push --remote upstream && gem release
 ```
 
-Copyright (c) 2019 [name of extension creator], released under the New BSD License
+Copyright (c) 2019 weLaika, released under the New BSD License

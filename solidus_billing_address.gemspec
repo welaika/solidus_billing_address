@@ -5,18 +5,18 @@ require 'solidus_billing_address/version'
 Gem::Specification.new do |s|
   s.name        = 'solidus_billing_address'
   s.version     = SolidusBillingAddress::VERSION
-  s.summary     = 'TODO'
-  s.description = 'TODO'
+  s.summary     = 'Solidus extension for (italian) billing address requirements'
+  s.description = 'Modifies Spree::Address to allow customer to enter VAT Number, codice fiscale (personal tax code), PEC email and SDI code (codice fatturazione elettronica)'
   s.license     = 'BSD-3-Clause'
 
-  # s.author    = 'You'
-  # s.email     = 'you@example.com'
-  # s.homepage  = 'http://www.example.com'
+  s.author    = 'Fabrizio Monti'
+  s.email     = 'fabrizio.monti@welaika.com'
+  s.homepage  = 'https://dev.welaika.com'
 
   s.files = Dir["{app,config,db,lib}/**/*", 'LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['spec/**/*']
 
-  s.add_dependency 'solidus_core' # Set Solidus version
+  s.add_dependency 'solidus_core', '~> 2.8', '>= 2.8.2'
 
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'ffaker'
