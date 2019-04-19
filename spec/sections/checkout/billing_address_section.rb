@@ -4,6 +4,7 @@ module Checkout
   class BillingAddressSection < SitePrism::Section
     element :first_name_field, '#order_bill_address_attributes_firstname'
     element :last_name_field, '#order_bill_address_attributes_lastname'
+    element :company_field, '#order_bill_address_attributes_company'
     element :street_address_field, '#order_bill_address_attributes_address1'
     element :city_field, '#order_bill_address_attributes_city'
     element :country_select, '#order_bill_address_attributes_country_id'
@@ -20,6 +21,7 @@ module Checkout
 
       first_name_field.set attributes.fetch(:first_name, FFaker::Name.first_name)
       last_name_field.set attributes.fetch(:last_name, FFaker::Name.last_name)
+      company_field.set attributes.fetch(:company, FFaker::Company.name)
       street_address_field.set attributes.fetch(:street_address, FFaker::Address.street_address)
       city_field.set attributes.fetch(:city, FFaker::Address.city)
       country_select.select attributes.fetch(:country, Spree::Country.first.name)
