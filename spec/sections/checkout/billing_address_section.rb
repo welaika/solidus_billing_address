@@ -18,6 +18,7 @@ module Checkout
     element :personal_tax_code_field, '#order_bill_address_attributes_personal_tax_code'
     element :vat_number_field, '#order_bill_address_attributes_vat_number'
     element :billing_email_field, '#order_bill_address_attributes_billing_email'
+    element :einvoicing_code_field, '#order_bill_address_attributes_einvoicing_code'
 
     def fill_in(attributes: {})
       if Spree::Country.blank? || Spree::State.blank? # rubocop:disable Style/IfUnlessModifier
@@ -40,6 +41,7 @@ module Checkout
       personal_tax_code_field.set attributes.fetch(:personal_tax_code, 'RSSVSC52B07M183C')
       vat_number_field.set attributes.fetch(:vat_number, 'IT10300060018')
       billing_email_field.set attributes.fetch(:billing_email, FFaker::Internet.email)
+      einvoicing_code_field.set attributes.fetch(:einvoicing_code, '0000000')
     end
   end
 end

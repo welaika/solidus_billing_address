@@ -14,3 +14,4 @@ it:
         customer_type: 'Tipo di cliente'
         vat_number: 'Partita IVA'
         billing_email: 'Email PEC'
+        einvoicing_code: 'Codice SDI (fatturazione elettr.)'

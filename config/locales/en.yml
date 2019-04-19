@@ -14,3 +14,4 @@ en:
         customer_type: 'Customer type'
         vat_number: 'VAT number'
         billing_email: 'Billing email'
+        einvoicing_code: 'E-Invoicing code'
