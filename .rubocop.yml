@@ -1,4 +1,6 @@
-require: rubocop-rspec
+require:
+  - rubocop-rspec
+  - rubocop-performance
 
 AllCops:
   Exclude:
@@ -14,16 +16,30 @@ Lint/HandleExceptions:
   Exclude:
     - 'Rakefile'
 
+Metrics/AbcSize:
+  Exclude:
+    - 'spec/pages/**/*'
+    - 'spec/sections/**/*'
+
 Metrics/BlockLength:
   Exclude:
+    - '*.gemspec'
     - 'spec/**/*'
 
 Metrics/LineLength:
   Max: 170
 
+Metrics/MethodLength:
+  Exclude:
+    - 'spec/pages/**/*'
+    - 'spec/sections/**/*'
+
 # Style/ClassAndModuleChildren:
 #   Exclude:
 #     - 'app/models/spree/payment_method/bank_transfer.rb'
+
+RSpec/ExampleLength:
+  Max: 20
 
 Style/Documentation:
   Enabled: false

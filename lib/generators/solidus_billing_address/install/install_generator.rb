@@ -5,6 +5,12 @@ module SolidusBillingAddress
     class InstallGenerator < Rails::Generators::Base
       class_option :auto_run_migrations, type: :boolean, default: false
 
+      def self.source_paths
+        paths = superclass.source_paths
+        paths << File.expand_path('templates', __dir__)
+        paths.flatten
+      end
+
       def add_javascripts
         append_file 'vendor/assets/javascripts/spree/frontend/all.js', "//= require spree/frontend/solidus_billing_address\n"
         append_file 'vendor/assets/javascripts/spree/backend/all.js', "//= require spree/backend/solidus_billing_address\n"
@@ -17,6 +23,10 @@ module SolidusBillingAddress
 
       def add_migrations
         run 'bundle exec rake railties:install:migrations FROM=solidus_billing_address'
+      end
+
+      def generate_initializer
+        template 'config/initializers/solidus_billing_address.rb', 'config/initializers/solidus_billing_address.rb'
       end
 
       def run_migrations

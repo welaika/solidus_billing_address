@@ -18,8 +18,12 @@ ENV['RAILS_ENV'] = 'test'
 require File.expand_path('dummy/config/environment.rb', __dir__)
 
 require 'rspec/rails'
+require 'capybara/rails'
 require 'database_cleaner'
+require 'selenium-webdriver'
+require 'site_prism'
 require 'ffaker'
+require 'pry-byebug'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
