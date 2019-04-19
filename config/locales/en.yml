@@ -2,7 +2,13 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  spree:
+    customer_type:
+      private: 'Private'
+      business: 'Business'
+
   activerecord:
     attributes:
       spree/address:
         personal_tax_code: 'Personal tax code'
+        customer_type: 'Customer type'

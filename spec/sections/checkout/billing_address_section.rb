@@ -11,6 +11,8 @@ module Checkout
     element :state_select, '#order_bill_address_attributes_state_id'
     element :zip_field, '#order_bill_address_attributes_zipcode'
     element :phone_field, '#order_bill_address_attributes_phone'
+    element :private_customer_radio, '#order_bill_address_attributes_customer_type_private'
+    element :business_customer_radio, '#order_bill_address_attributes_customer_type_business'
 
     element :personal_tax_code_field, '#order_bill_address_attributes_personal_tax_code'
 
@@ -18,6 +20,9 @@ module Checkout
       if Spree::Country.blank? || Spree::State.blank? # rubocop:disable Style/IfUnlessModifier
         raise ArgumentError, 'Cannot fill in an address without at least one country and one state'
       end
+
+      private_customer_radio.choose if attributes.fetch(:customer_type, 'private').to_s == 'private'
+      business_customer_radio.choose if attributes.fetch(:customer_type, 'business').to_s == 'business'
 
       first_name_field.set attributes.fetch(:first_name, FFaker::Name.first_name)
       last_name_field.set attributes.fetch(:last_name, FFaker::Name.last_name)
