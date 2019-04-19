@@ -15,7 +15,7 @@ RSpec.describe 'Billing email for billing address in checkout step', type: :feat
     fill_in 'order_email', with: 'wafel@example.com'
   end
 
-  it 'allows user to fill in the billing email', aggregate_failures: true do
+  it 'allows user to fill in the billing email' do
     click_button 'Continue'
 
     address_page = Checkout::AddressPage.new

@@ -15,7 +15,7 @@ RSpec.describe 'Customer type for billing address in checkout step', type: :feat
     fill_in 'order_email', with: 'wafel@example.com'
   end
 
-  it 'allows user to choose between personal and business billing address', aggregate_failures: true do
+  it 'allows user to choose between personal and business billing address' do
     click_button 'Continue'
 
     address_page = Checkout::AddressPage.new

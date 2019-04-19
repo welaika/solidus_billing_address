@@ -15,7 +15,7 @@ RSpec.describe 'Personal tax code for billing address in checkout step', type: :
     fill_in 'order_email', with: 'wafel@example.com'
   end
 
-  it 'allows user to fill in the personal tax code field', aggregate_failures: true do
+  it 'allows user to fill in the personal tax code field' do
     click_button 'Continue'
 
     address_page = Checkout::AddressPage.new

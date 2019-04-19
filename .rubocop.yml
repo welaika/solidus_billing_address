@@ -41,5 +41,9 @@ Metrics/MethodLength:
 RSpec/ExampleLength:
   Max: 20
 
+RSpec/MultipleExpectations:
+  Exclude:
+    - 'spec/features/**/*'
+
 Style/Documentation:
   Enabled: false

@@ -1,6 +1,8 @@
 SolidusBillingAddress
 =====================
 
+[![Build Status](https://travis-ci.org/welaika/solidus_billing_address.svg?branch=master)](https://travis-ci.org/welaika/solidus_billing_address)
+
 Introduction goes here.
 
 Installation

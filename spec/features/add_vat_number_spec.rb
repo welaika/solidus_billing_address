@@ -15,7 +15,7 @@ RSpec.describe 'VAT number for billing address in checkout step', type: :feature
     fill_in 'order_email', with: 'wafel@example.com'
   end
 
-  it 'allows user to fill in the vat number field', aggregate_failures: true do
+  it 'allows user to fill in the vat number field' do
     click_button 'Continue'
 
     address_page = Checkout::AddressPage.new

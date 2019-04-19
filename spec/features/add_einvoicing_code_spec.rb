@@ -15,7 +15,7 @@ RSpec.describe 'E-Invoicing code for billing address in checkout step', type: :f
     fill_in 'order_email', with: 'wafel@example.com'
   end
 
-  it 'allows user to fill in the e-invoicing code', aggregate_failures: true do
+  it 'allows user to fill in the e-invoicing code' do
     click_button 'Continue'
 
     address_page = Checkout::AddressPage.new

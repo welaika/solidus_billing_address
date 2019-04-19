@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*', 'LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['spec/**/*']
 
-  s.add_dependency 'solidus_core', '~> 2.8', '>= 2.8.2'
+  s.add_dependency 'solidus_core', '~> 2.8'
   s.add_dependency 'valvat', '~> 0.7.4'
 
   s.add_development_dependency 'capybara', '~> 3.17'
@@ -37,4 +37,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'simplecov', '~> 0.16.1'
   s.add_development_dependency 'site_prism', '~> 3.1'
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'webdrivers', '~> 3.0'
 end
