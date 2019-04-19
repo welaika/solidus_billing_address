@@ -5,4 +5,5 @@ Spree.config do |config|
 end
 
 Spree::PermittedAttributes.address_attributes.push :personal_tax_code,
-                                                   :customer_type
+                                                   :customer_type,
+                                                   :vat_number

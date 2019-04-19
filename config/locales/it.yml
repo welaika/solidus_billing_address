@@ -12,3 +12,4 @@ it:
       spree/address:
         personal_tax_code: 'Codice fiscale'
         customer_type: 'Tipo di cliente'
+        vat_number: 'Partita IVA'

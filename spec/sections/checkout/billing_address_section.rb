@@ -11,10 +11,12 @@ module Checkout
     element :state_select, '#order_bill_address_attributes_state_id'
     element :zip_field, '#order_bill_address_attributes_zipcode'
     element :phone_field, '#order_bill_address_attributes_phone'
+
     element :private_customer_radio, '#order_bill_address_attributes_customer_type_private'
     element :business_customer_radio, '#order_bill_address_attributes_customer_type_business'
 
     element :personal_tax_code_field, '#order_bill_address_attributes_personal_tax_code'
+    element :vat_number_field, '#order_bill_address_attributes_vat_number'
 
     def fill_in(attributes: {})
       if Spree::Country.blank? || Spree::State.blank? # rubocop:disable Style/IfUnlessModifier
@@ -35,6 +37,7 @@ module Checkout
       phone_field.set attributes.fetch(:phone, FFaker::PhoneNumber.phone_number)
 
       personal_tax_code_field.set attributes.fetch(:personal_tax_code, 'RSSVSC52B07M183C')
+      vat_number_field.set attributes.fetch(:vat_number, 'IT10300060018')
     end
   end
 end
