@@ -37,6 +37,11 @@
     <%= form.text_field :vat_number, autocomplete: address_type + 'vat_number' %>
   </div>
 
+  <div class="field" id=<%="#{address_id}billing_email" %>>
+    <%= form.label :billing_email, t('activerecord.attributes.spree/address.billing_email') %>
+    <%= form.text_field :billing_email, autocomplete: address_type + 'billing_email' %>
+  </div>
+
   <% if Spree::Config[:company] %>
     <div class="field" id=<%="#{address_id}company" %>>
       <%= form.label :company, t('spree.company') %>

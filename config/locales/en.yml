@@ -13,3 +13,4 @@ en:
         personal_tax_code: 'Personal tax code'
         customer_type: 'Customer type'
         vat_number: 'VAT number'
+        billing_email: 'Billing email'

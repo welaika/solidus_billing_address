@@ -6,4 +6,5 @@ end
 
 Spree::PermittedAttributes.address_attributes.push :personal_tax_code,
                                                    :customer_type,
-                                                   :vat_number
+                                                   :vat_number,
+                                                   :billing_email
