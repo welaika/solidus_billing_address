@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Spree::Address, type: :model do
-  describe 'vat_number' do
+  describe '#vat_number' do
     let(:address) { build(:address) }
 
     it 'can be empty' do
@@ -25,7 +25,7 @@ RSpec.describe Spree::Address, type: :model do
     end
   end
 
-  describe 'billing_email' do
+  describe '#billing_email' do
     let(:address) { build(:address) }
 
     it 'can be empty' do

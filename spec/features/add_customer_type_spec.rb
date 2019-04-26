@@ -13,23 +13,51 @@ RSpec.describe 'Customer type for billing address in checkout step', type: :feat
 
     click_button 'Checkout'
     fill_in 'order_email', with: 'wafel@example.com'
+
+    click_button 'Continue'
   end
 
   it 'allows user to choose between personal and business billing address' do
-    click_button 'Continue'
-
     address_page = Checkout::AddressPage.new
     expect(address_page).to be_displayed
 
     expect(address_page.billing_address).to have_business_customer_radio
     expect(address_page.billing_address).to have_private_customer_radio
-    address_page.billing_address.fill_in(attributes: { customer_type: 'business' })
-    address_page.continue_button.click
+  end
 
-    delivery_page = Checkout::DeliveryPage.new
-    expect(delivery_page).to be_displayed
+  context 'when customer selects "private"' do
+    let(:address_page) { Checkout::AddressPage.new }
 
-    order = Spree::Order.last
-    expect(order.billing_address.customer_type).to eq('business')
+    before do
+      address_page.billing_address.private_customer_radio.choose
+    end
+
+    it 'shows only fields for private billing address', aggregate_failures: true do
+      address_section = address_page.billing_address
+
+      expect(address_section).to have_personal_tax_code_field
+      expect(address_section).not_to have_company_field
+      expect(address_section).not_to have_vat_number_field
+      expect(address_section).not_to have_billing_email_field
+      expect(address_section).not_to have_einvoicing_code_field
+    end
+  end
+
+  context 'when customer selects "business"' do
+    let(:address_page) { Checkout::AddressPage.new }
+
+    before do
+      address_page.billing_address.business_customer_radio.choose
+    end
+
+    it 'shows only fields for business billing address', aggregate_failures: true do
+      address_section = address_page.billing_address
+
+      expect(address_section).not_to have_personal_tax_code_field
+      expect(address_section).to have_company_field
+      expect(address_section).to have_vat_number_field
+      expect(address_section).to have_billing_email_field
+      expect(address_section).to have_einvoicing_code_field
+    end
   end
 end

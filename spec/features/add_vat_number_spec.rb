@@ -13,22 +13,41 @@ RSpec.describe 'VAT number for billing address in checkout step', type: :feature
 
     click_button 'Checkout'
     fill_in 'order_email', with: 'wafel@example.com'
+
+    click_button 'Continue'
   end
 
-  it 'allows user to fill in the vat number field' do
-    click_button 'Continue'
+  context 'when customer is a private' do
+    let(:address_page) { Checkout::AddressPage.new }
 
-    address_page = Checkout::AddressPage.new
-    expect(address_page).to be_displayed
+    before do
+      address_page.billing_address.private_customer_radio.choose
+    end
 
-    expect(address_page.billing_address).to have_vat_number_field
-    address_page.billing_address.fill_in(attributes: { vat_number: 'IT02112180688' })
-    address_page.continue_button.click
+    it 'does not show vat number field' do
+      expect(address_page).to be_displayed
+      expect(address_page.billing_address).not_to have_vat_number_field
+    end
+  end
 
-    delivery_page = Checkout::DeliveryPage.new
-    expect(delivery_page).to be_displayed
+  context 'when customer is a business' do
+    let(:address_page) { Checkout::AddressPage.new }
 
-    order = Spree::Order.last
-    expect(order.billing_address.vat_number).to eq('IT02112180688')
+    before do
+      address_page.billing_address.business_customer_radio.choose
+    end
+
+    it 'allows user to fill in the vat number field' do
+      expect(address_page).to be_displayed
+      expect(address_page.billing_address).to have_vat_number_field
+      address_page.billing_address.fill_in_as_business(attributes: { vat_number: 'IT02112180688' })
+      address_page.continue_button.click
+
+      delivery_page = Checkout::DeliveryPage.new
+      expect(delivery_page).to be_displayed
+
+      order = Spree::Order.last
+      expect(order.billing_address.vat_number).to eq('IT02112180688')
+    end
   end
 end
