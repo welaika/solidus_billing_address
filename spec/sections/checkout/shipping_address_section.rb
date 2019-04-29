@@ -2,15 +2,15 @@
 
 module Checkout
   class ShippingAddressSection < SitePrism::Section
-    element :first_name_field, '#order_bill_address_attributes_firstname'
-    element :last_name_field, '#order_bill_address_attributes_lastname'
-    element :company_field, '#order_bill_address_attributes_company'
-    element :street_address_field, '#order_bill_address_attributes_address1'
-    element :city_field, '#order_bill_address_attributes_city'
-    element :country_select, '#order_bill_address_attributes_country_id'
-    element :state_select, '#order_bill_address_attributes_state_id'
-    element :zip_field, '#order_bill_address_attributes_zipcode'
-    element :phone_field, '#order_bill_address_attributes_phone'
+    element :first_name_field, '#order_ship_address_attributes_firstname'
+    element :last_name_field, '#order_ship_address_attributes_lastname'
+    element :company_field, '#order_ship_address_attributes_company'
+    element :street_address_field, '#order_ship_address_attributes_address1'
+    element :city_field, '#order_ship_address_attributes_city'
+    element :country_select, '#order_ship_address_attributes_country_id'
+    element :state_select, '#order_ship_address_attributes_state_id'
+    element :zip_field, '#order_ship_address_attributes_zipcode'
+    element :phone_field, '#order_ship_address_attributes_phone'
 
     def fill_in(attributes: {})
       if Spree::Country.blank? || Spree::State.blank? # rubocop:disable Style/IfUnlessModifier

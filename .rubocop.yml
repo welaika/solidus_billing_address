@@ -42,8 +42,12 @@ RSpec/ExampleLength:
   Max: 20
 
 RSpec/MultipleExpectations:
+  Max: 2
   Exclude:
     - 'spec/features/**/*'
+
+RSpec/NestedGroups:
+  Max: 4
 
 Style/Documentation:
   Enabled: false
