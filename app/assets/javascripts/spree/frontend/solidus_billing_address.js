@@ -18,7 +18,7 @@ function toggleAddressFields(customerType) {
 
     $('#order_bill_address_attributes_company').prop('disabled', false);
     $('#bcompany').show();
-  } else {
+  } else if (customerType === 'private') {
     $('#order_bill_address_attributes_personal_tax_code').prop('disabled', false);
     $('#bpersonal_tax_code').show();
 
