@@ -10,6 +10,9 @@ module SolidusBillingAddress
       base.extend(ClassMethods)
       base.validates :vat_number, valvat: true, allow_blank: true
       base.validates :billing_email, 'spree/email' => true, allow_blank: true
+
+      base.validates :vat_number, presence: true, if: :vat_number_required?
+      base.validates :personal_tax_code, presence: true, if: :personal_tax_code_required?
     end
 
     # NOTE: it fallbacks to solidus (`super`) if the address types are equals: this means that
@@ -35,6 +38,26 @@ module SolidusBillingAddress
 
     def billing?
       address_type == 'billing'
+    end
+
+    def private_customer?
+      # FIXME: test...
+      customer_type == 'private'
+    end
+
+    def business_customer?
+      # FIXME: test...
+      customer_type == 'business'
+    end
+
+    private # NOTE: is this valid??
+
+    def vat_number_required?
+      billing? && business_customer?
+    end
+
+    def personal_tax_code_required?
+      billing? && private_customer?
     end
 
     module ClassMethods

@@ -25,6 +25,7 @@ Metrics/BlockLength:
   Exclude:
     - '*.gemspec'
     - 'spec/**/*'
+    - 'lib/solidus_billing_address/factories.rb'
 
 Metrics/LineLength:
   Max: 170

@@ -34,6 +34,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rubocop-rspec', '~> 1.32'
   s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'selenium-webdriver', '~> 3.141'
+  s.add_development_dependency 'shoulda-matchers', '~> 4.0'
   s.add_development_dependency 'simplecov', '~> 0.16.1'
   s.add_development_dependency 'site_prism', '~> 3.1'
   s.add_development_dependency 'sqlite3'

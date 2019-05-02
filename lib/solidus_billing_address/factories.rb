@@ -22,9 +22,23 @@ FactoryBot.modify do
 
   factory :bill_address do
     address_type { 'billing' }
+    private_customer
+
+    trait :business_customer do
+      customer_type { 'business' }
+      vat_number { 'IT10300060018' }
+      billing_email { 'foo@example.com' }
+      einvoicing_code { 'SZLUBAI' }
+    end
+
+    trait :private_customer do
+      customer_type { 'private' }
+      personal_tax_code { 'VIVA VASCO' }
+    end
   end
 
   factory :ship_address do
     address_type { 'shipping' }
+    customer_type { nil }
   end
 end

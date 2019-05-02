@@ -3,8 +3,33 @@
 require 'spec_helper'
 
 RSpec.describe Spree::Address, type: :model do
+  describe 'validations' do
+    context 'with a billing address' do
+      context 'when address is a business one' do
+        subject(:address) { build(:bill_address, :business_customer) }
+
+        it { is_expected.to validate_presence_of(:vat_number) }
+        it { is_expected.not_to validate_presence_of(:personal_tax_code) }
+      end
+
+      context 'when address ia a private one' do
+        subject(:address) { build(:bill_address, :private_customer) }
+
+        it { is_expected.not_to validate_presence_of(:vat_number) }
+        it { is_expected.to validate_presence_of(:personal_tax_code) }
+      end
+    end
+
+    context 'with a shipping address' do
+      subject(:address) { build(:ship_address) }
+
+      it { is_expected.not_to validate_presence_of(:vat_number) }
+      it { is_expected.not_to validate_presence_of(:personal_tax_code) }
+    end
+  end
+
   describe '#vat_number' do
-    let(:address) { build(:address) }
+    let(:address) { build(:bill_address, :business) }
 
     it 'can be empty' do
       address.vat_number = ''
@@ -26,7 +51,7 @@ RSpec.describe Spree::Address, type: :model do
   end
 
   describe '#billing_email' do
-    let(:address) { build(:address) }
+    let(:address) { build(:bill_address) }
 
     it 'can be empty' do
       address.billing_email = ''
