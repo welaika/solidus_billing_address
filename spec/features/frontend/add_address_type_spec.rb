@@ -15,7 +15,6 @@ RSpec.describe 'Save address_type into database', type: :feature, js: true do
     fill_in 'order_email', with: 'wafel@example.com'
 
     click_button 'Continue'
-    puts "Spree::Address.count => #{Spree::Address.count}"
   end
 
   context 'when billing and shipping addresses are the same' do
