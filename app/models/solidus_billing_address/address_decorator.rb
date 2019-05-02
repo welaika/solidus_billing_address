@@ -29,6 +29,14 @@ module SolidusBillingAddress
       end
     end
 
+    def shipping?
+      address_type == 'shipping'
+    end
+
+    def billing?
+      address_type == 'billing'
+    end
+
     module ClassMethods
       def shipping_default_attributes
         {

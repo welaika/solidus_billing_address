@@ -126,6 +126,42 @@ RSpec.describe Spree::Address, type: :model do
     end
   end
 
+  describe '#shipping?' do
+    context 'when `address_type` is "shipping"' do
+      let(:address) { build(:address, address_type: 'shipping') }
+
+      it 'returns true' do
+        expect(address).to be_shipping
+      end
+    end
+
+    context 'when `address_type` is "billing"' do
+      let(:address) { build(:address, address_type: 'billing') }
+
+      it 'returns false' do
+        expect(address).not_to be_shipping
+      end
+    end
+  end
+
+  describe '#billing?' do
+    context 'when `address_type` is "shipping"' do
+      let(:address) { build(:address, address_type: 'shipping') }
+
+      it 'returns false' do
+        expect(address).not_to be_billing
+      end
+    end
+
+    context 'when `address_type` is "billing"' do
+      let(:address) { build(:address, address_type: 'billing') }
+
+      it 'returns true' do
+        expect(address).to be_billing
+      end
+    end
+  end
+
   describe '.shipping_default_attributes' do
     it 'returns an hash of attributes with default values for shipping address' do
       expect(described_class.shipping_default_attributes).to eq(
