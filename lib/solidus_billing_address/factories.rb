@@ -21,10 +21,10 @@ FactoryBot.modify do
   end
 
   factory :bill_address do
-    address_type 'billing'
+    address_type { 'billing' }
   end
 
   factory :ship_address do
-    address_type 'shipping'
+    address_type { 'shipping' }
   end
 end
