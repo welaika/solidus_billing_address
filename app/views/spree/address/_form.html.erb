@@ -31,6 +31,13 @@
     <%= form.text_field :lastname, autocomplete: address_type + ' family-name' %>
   </div>
 
+  <% if Spree::Config[:company] %>
+    <div class="field" id=<%="#{address_id}company" %>>
+      <%= form.label :company, t('spree.company') %>
+      <%= form.text_field :company, autocomplete: address_type + ' organization' %>
+    </div>
+  <% end %>
+
   <% if address_type == 'billing' %>
     <div class="field" id=<%="#{address_id}personal_tax_code" %>>
       <%= form.label :personal_tax_code, t('activerecord.attributes.spree/address.personal_tax_code') %>
@@ -50,13 +57,6 @@
     <div class="field" id=<%="#{address_id}einvoicing_code" %>>
       <%= form.label :einvoicing_code, t('activerecord.attributes.spree/address.einvoicing_code') %>
       <%= form.text_field :einvoicing_code, autocomplete: address_type + 'einvoicing_code' %>
-    </div>
-  <% end %>
-
-  <% if Spree::Config[:company] %>
-    <div class="field" id=<%="#{address_id}company" %>>
-      <%= form.label :company, t('spree.company') %>
-      <%= form.text_field :company, autocomplete: address_type + ' organization' %>
     </div>
   <% end %>
 
