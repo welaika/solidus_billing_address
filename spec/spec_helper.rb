@@ -90,4 +90,5 @@ RSpec.configure do |config|
 
   config.fail_fast = ENV['FAIL_FAST'] || false
   config.order = 'random'
+  config.example_status_persistence_file_path = 'rspec_examples.txt'
 end
