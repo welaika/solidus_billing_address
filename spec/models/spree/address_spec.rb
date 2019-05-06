@@ -4,6 +4,14 @@ require 'spec_helper'
 
 RSpec.describe Spree::Address, type: :model do
   describe 'validations' do
+    subject(:address) { build(:address) }
+
+    it { is_expected.not_to allow_value('NOT A VAT').for(:vat_number) }
+    it { is_expected.to allow_values('IT10300060018', '', nil).for(:vat_number) }
+
+    it { is_expected.not_to allow_value('NOT AN EMAIL').for(:billing_email) }
+    it { is_expected.to allow_value('giuseppe@pec.it', '', nil).for(:billing_email) }
+
     context 'with a billing address' do
       context 'when address is a business one' do
         subject(:address) { build(:bill_address, :business_customer) }
@@ -25,50 +33,6 @@ RSpec.describe Spree::Address, type: :model do
 
       it { is_expected.not_to validate_presence_of(:vat_number) }
       it { is_expected.not_to validate_presence_of(:personal_tax_code) }
-    end
-  end
-
-  describe '#vat_number' do
-    let(:address) { build(:bill_address, :business) }
-
-    it 'can be empty' do
-      address.vat_number = ''
-      address.validate
-      expect(address.errors[:vat_number]).to be_empty
-    end
-
-    it 'adds an error if the vat number is not syntactically valid' do
-      address.vat_number = 'not a vat number'
-      address.validate
-      expect(address.errors[:vat_number]).to be_present
-    end
-
-    it 'does not add an error if the vat number is syntactically valid' do
-      address.vat_number = 'IT10300060018'
-      address.validate
-      expect(address.errors[:vat_number]).to be_blank
-    end
-  end
-
-  describe '#billing_email' do
-    let(:address) { build(:bill_address) }
-
-    it 'can be empty' do
-      address.billing_email = ''
-      address.validate
-      expect(address.errors[:billing_email]).to be_empty
-    end
-
-    it 'adds an error if the billing email is not a valid email' do
-      address.billing_email = 'not an email'
-      address.validate
-      expect(address.errors[:billing_email]).to be_present
-    end
-
-    it 'does not add an error if the billign email is a valid email' do
-      address.billing_email = 'example@pec.it'
-      address.validate
-      expect(address.errors[:billing_email]).to be_blank
     end
   end
 
@@ -153,37 +117,57 @@ RSpec.describe Spree::Address, type: :model do
 
   describe '#shipping?' do
     context 'when `address_type` is "shipping"' do
-      let(:address) { build(:address, address_type: 'shipping') }
+      subject { build(:address, address_type: 'shipping').shipping? }
 
-      it 'returns true' do
-        expect(address).to be_shipping
-      end
+      it { is_expected.to be(true) }
     end
 
     context 'when `address_type` is "billing"' do
-      let(:address) { build(:address, address_type: 'billing') }
+      subject { build(:address, address_type: 'billing').shipping? }
 
-      it 'returns false' do
-        expect(address).not_to be_shipping
-      end
+      it { is_expected.not_to be(true) }
     end
   end
 
   describe '#billing?' do
     context 'when `address_type` is "shipping"' do
-      let(:address) { build(:address, address_type: 'shipping') }
+      subject { build(:address, address_type: 'shipping').billing? }
 
-      it 'returns false' do
-        expect(address).not_to be_billing
-      end
+      it { is_expected.not_to be(true) }
     end
 
     context 'when `address_type` is "billing"' do
-      let(:address) { build(:address, address_type: 'billing') }
+      subject { build(:address, address_type: 'billing').billing? }
 
-      it 'returns true' do
-        expect(address).to be_billing
-      end
+      it { is_expected.to be(true) }
+    end
+  end
+
+  describe '#private_customer?' do
+    context 'when `customer_type` is "private"' do
+      subject { build(:address, customer_type: 'private').private_customer? }
+
+      it { is_expected.to be(true) }
+    end
+
+    context 'when `customer_type` is "business"' do
+      subject { build(:address, customer_type: 'business').private_customer? }
+
+      it { is_expected.to be(false) }
+    end
+  end
+
+  describe '#business_customer?' do
+    context 'when `customer_type` is "private"' do
+      subject { build(:address, customer_type: 'private').business_customer? }
+
+      it { is_expected.to be(false) }
+    end
+
+    context 'when `customer_type` is "business"' do
+      subject { build(:address, customer_type: 'business').business_customer? }
+
+      it { is_expected.to be(true) }
     end
   end
 
