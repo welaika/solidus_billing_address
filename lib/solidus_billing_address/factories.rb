@@ -2,7 +2,6 @@
 
 FactoryBot.modify do
   factory :address do
-
     lastname { 'Doe' }
 
     # NOTE: I created this trait to have a fix set of attributes.
