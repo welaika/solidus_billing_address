@@ -67,6 +67,7 @@ module SolidusBillingAddress
       def shipping_default_attributes
         {
           address_type: 'shipping',
+          customer_type: nil,
           personal_tax_code: nil,
           vat_number: nil,
           billing_email: nil,

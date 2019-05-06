@@ -177,6 +177,7 @@ RSpec.describe Spree::Address, type: :model do
     it 'returns an hash of attributes with default values for shipping address' do
       expect(described_class.shipping_default_attributes).to eq(
         address_type: 'shipping',
+        customer_type: nil,
         personal_tax_code: nil,
         vat_number: nil,
         billing_email: nil,
