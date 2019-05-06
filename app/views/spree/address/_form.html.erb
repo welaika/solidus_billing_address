@@ -4,17 +4,17 @@
 <div class="inner" data-hook=<%="#{address_type}_inner" %>>
 
   <% if address_type == 'billing' %>
-    <div class="field field-required" id=<%="#{address_id}customer_type" %>>
+    <div class="field-radio field-radio-required" id=<%="#{address_id}customer_type" %>>
       <%= form.label :customer_type do %>
-        <%= t('activerecord.attributes.spree/address.customer_type') %><abbr class="required" title="required">*</abbr>
+        <%= t('activerecord.attributes.spree/address.customer_type') %>
       <% end %>
-      <div>
+      <div class='field-radio-inputs-container'>
         <%= form.label "customer_type_private" do %>
-          <%= form.radio_button :customer_type, 'private' %>
+          <%= form.radio_button :customer_type, 'private', class: 'required', required: true %>
           <%= t('spree.customer_type.private') %>
         <% end %>
         <%= form.label "customer_type_business" do %>
-          <%= form.radio_button :customer_type, 'business' %>
+          <%= form.radio_button :customer_type, 'business', class: 'required', required: true %>
           <%= t('spree.customer_type.business') %>
         <% end %>
       </div>
@@ -39,14 +39,14 @@
   <% end %>
 
   <% if address_type == 'billing' %>
-    <div class="field" id=<%="#{address_id}personal_tax_code" %>>
+    <div class="field field-required" id=<%="#{address_id}personal_tax_code" %>>
       <%= form.label :personal_tax_code, t('activerecord.attributes.spree/address.personal_tax_code') %>
-      <%= form.text_field :personal_tax_code, autocomplete: address_type + 'personal_tax_code' %>
+      <%= form.text_field :personal_tax_code, class: 'required', autocomplete: address_type + 'personal_tax_code', required: true %>
     </div>
 
-    <div class="field" id=<%="#{address_id}vat_number" %>>
+    <div class="field field-required" id=<%="#{address_id}vat_number" %>>
       <%= form.label :vat_number, t('activerecord.attributes.spree/address.vat_number') %>
-      <%= form.text_field :vat_number, autocomplete: address_type + 'vat_number' %>
+      <%= form.text_field :vat_number, class: 'required', autocomplete: address_type + 'vat_number', required: true %>
     </div>
 
     <div class="field" id=<%="#{address_id}billing_email" %>>

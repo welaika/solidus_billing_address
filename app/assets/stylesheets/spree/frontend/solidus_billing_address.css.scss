@@ -1,0 +1,35 @@
+/*
+Placeholder manifest file.
+the installer will append this file to the app vendored assets here: 'vendor/assets/stylesheets/spree/frontend/all.css'
+*/
+
+.field-radio {
+  padding: 10px 0;
+
+  > label {
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+
+  .field-radio-inputs-container {
+    > label {
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+
+  input {
+    display: inline-block;
+  }
+
+  /* adds the pseudo element only to the direct label children */
+  /* otherwise `.field-required` adds it also to radio buttons labels as well */
+  &-required > label:after {
+    content: "*";
+    display: inline-block;
+    color: red;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-left: 3px;
+  }
+}
