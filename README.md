@@ -9,6 +9,8 @@ This extension adds some new attributes to billing address form in `solidus_fron
 * Billing email (e.g. "PEC Address" in Italy)
 * Electroning invoicing code (e.g. "Codice destinatario fatturazione elettronica" in Italy)
 
+It also validates the presence of customer last name.
+
 ## Installation
 
 Add solidus_billing_address to your Gemfile:

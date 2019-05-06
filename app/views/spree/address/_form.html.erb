@@ -26,9 +26,9 @@
     <%= form.text_field :firstname, class: 'required', autocomplete: address_type + ' given-name', required: true, autofocus: true %>
   </div>
 
-  <div class="field" id=<%="#{address_id}lastname" %>>
+  <div class="field field-required" id=<%="#{address_id}lastname" %>>
     <%= form.label :lastname, t('spree.last_name') %>
-    <%= form.text_field :lastname, autocomplete: address_type + ' family-name' %>
+    <%= form.text_field :lastname, class: 'required', autocomplete: address_type + ' family-name', required: true %>
   </div>
 
   <% if Spree::Config[:company] %>

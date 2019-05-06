@@ -8,6 +8,7 @@ module SolidusBillingAddress
 
     def self.prepended(base)
       base.extend(ClassMethods)
+      base.validates :last_name, presence: true
       base.validates :vat_number, valvat: true, allow_blank: true
       base.validates :billing_email, 'spree/email' => true, allow_blank: true
 

@@ -2,6 +2,9 @@
 
 FactoryBot.modify do
   factory :address do
+
+    lastname { 'Doe' }
+
     # NOTE: I created this trait to have a fix set of attributes.
     #       It's useful when we want to create a billing address that
     #       is the same as the shipping address
