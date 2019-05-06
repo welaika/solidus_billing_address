@@ -75,7 +75,7 @@ RSpec.describe Spree::Address, type: :model do
   describe '::BILLING_ONLY_ATTRS' do
     it 'defines a list of attributes that are relevant for billing address only' do
       expect(described_class::BILLING_ONLY_ATTRS).to match_array(
-        %w[personal_tax_code vat_number billing_email einvoicing_code]
+        %w[customer_type personal_tax_code vat_number billing_email einvoicing_code]
       )
     end
   end

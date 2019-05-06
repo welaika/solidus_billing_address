@@ -4,7 +4,7 @@ module SolidusBillingAddress
   module AddressDecorator
     # NOTE: e' il modo giusto per definire una constante da usare dentro a Spree::Address ?
     #       sembra funzionare, ma ho dubbi!
-    BILLING_ONLY_ATTRS = %w[personal_tax_code vat_number billing_email einvoicing_code].freeze
+    BILLING_ONLY_ATTRS = %w[customer_type personal_tax_code vat_number billing_email einvoicing_code].freeze
 
     def self.prepended(base)
       base.extend(ClassMethods)
