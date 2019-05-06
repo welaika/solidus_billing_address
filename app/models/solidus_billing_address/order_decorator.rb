@@ -4,9 +4,10 @@ module SolidusBillingAddress
   module OrderDecorator
     def self.prepended(base); end
 
-    # NOTE: unlike plain solidus, this method **clones** a billing address
-    #       into a shipping address. Solidus, instead, assigns the same
-    #       billing address ID to the shipping address
+    # NOTE: unlike plain solidus, this method creates a new address if
+    #       shipping and billing are not the same address.
+    #       Solidus, instead, assigns the same billing address ID to
+    #       the shipping address
     def assign_billing_to_shipping_address
       return true unless bill_address
 
