@@ -184,4 +184,64 @@ RSpec.describe Spree::Address, type: :model do
       )
     end
   end
+
+  describe '.billing' do
+    let(:bill_address) { create(:bill_address) }
+    let(:ship_address) { create(:ship_address) }
+
+    before do
+      bill_address
+      ship_address
+    end
+
+    it 'returns a collection of billing addresses only' do
+      expect(described_class.billing).to match_array(bill_address)
+    end
+  end
+
+  describe '.shipping' do
+    let(:bill_address) { create(:bill_address) }
+    let(:ship_address) { create(:ship_address) }
+
+    before do
+      bill_address
+      ship_address
+    end
+
+    it 'returns a collection of shipping addresses only' do
+      expect(described_class.shipping).to match_array(ship_address)
+    end
+  end
+
+  describe '.billing_private' do
+    let(:bill_address_private) { create(:bill_address, :private_customer) }
+    let(:bill_address_business) { create(:bill_address, :business_customer) }
+    let(:ship_address) { create(:ship_address) }
+
+    before do
+      bill_address_private
+      bill_address_business
+      ship_address
+    end
+
+    it 'returns a collection of billing addresses for private customers only' do
+      expect(described_class.billing_private).to match_array(bill_address_private)
+    end
+  end
+
+  describe '.billing_business' do
+    let(:bill_address_private) { create(:bill_address, :private_customer) }
+    let(:bill_address_business) { create(:bill_address, :business_customer) }
+    let(:ship_address) { create(:ship_address) }
+
+    before do
+      bill_address_private
+      bill_address_business
+      ship_address
+    end
+
+    it 'returns a collection of billing addresses for business customers only' do
+      expect(described_class.billing_business).to match_array(bill_address_business)
+    end
+  end
 end

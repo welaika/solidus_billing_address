@@ -4,7 +4,7 @@ module SolidusBillingAddress
   module AddressDecorator
     BILLING_ONLY_ATTRS = %w[customer_type personal_tax_code vat_number billing_email einvoicing_code].freeze
 
-    def self.prepended(base)
+    def self.prepended(base) # rubocop:disable Metrics/AbcSize
       base.extend(ClassMethods)
       base.validates :last_name, presence: true
       base.validates :vat_number, valvat: true, allow_blank: true
@@ -12,6 +12,11 @@ module SolidusBillingAddress
 
       base.validates :vat_number, presence: true, if: :vat_number_required?
       base.validates :personal_tax_code, presence: true, if: :personal_tax_code_required?
+
+      base.scope :billing, -> { where(address_type: 'billing') }
+      base.scope :shipping, -> { where(address_type: 'shipping') }
+      base.scope :billing_private, -> { billing.where(customer_type: 'private') }
+      base.scope :billing_business, -> { billing.where(customer_type: 'business') }
     end
 
     # NOTE: This method overrides the one in `Spree::Address` class.
