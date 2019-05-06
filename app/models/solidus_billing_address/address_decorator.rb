@@ -15,17 +15,18 @@ module SolidusBillingAddress
       base.validates :personal_tax_code, presence: true, if: :personal_tax_code_required?
     end
 
-    # NOTE: it fallbacks to solidus (`super`) if the address types are equals: this means that
-    #       when we match a billing address against another billing address we want to check
-    #       for their billing only attributes too.
-    #       When we match a billing address against a shipping address, then we care only
-    #       about the classic addres fields (we remove the billing only attributes)
+    # NOTE: This method overrides the one in `Spree::Address` class.
+    #       When address type are the same, we match against all value attributes.
+    #       When we match different address types (billing vs shipping), we care only
+    #       about the base address fields (we remove the billing only attributes). This is
+    #       useful when we want to know that a package should be shipped to the same location
+    #       of a billing address.
     def ==(other_address) # rubocop:disable Naming/BinaryOperatorParameterName
-      if address_type == other_address.address_type
-        super
-      else
-        return false unless other_address&.respond_to?(:value_attributes)
+      return false unless other_address&.respond_to?(:value_attributes)
 
+      if address_type == other_address.address_type
+        value_attributes == other_address.value_attributes
+      else
         excluded_attributes = BILLING_ONLY_ATTRS + %w[address_type]
         value_attributes.except(*excluded_attributes) ==
           other_address.value_attributes.except(*excluded_attributes)
