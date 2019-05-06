@@ -11,6 +11,20 @@ This extension adds some new attributes to billing address form in `solidus_fron
 
 It also validates the presence of customer last name.
 
+## Demo (frontend)
+
+Billing address for a private customer
+
+![Demo - Billing address for a private customer](billing_private.png)
+
+Billing address for a business customer
+
+![Demo - Billing address for a business customer](billing_business.png)
+
+Shipping address (no need for billing only attributes)
+
+![Demo shipping address](shipping.png)
+
 ## Installation
 
 Add solidus_billing_address to your Gemfile:
