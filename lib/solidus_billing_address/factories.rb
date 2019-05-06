@@ -33,7 +33,7 @@ FactoryBot.modify do
 
     trait :private_customer do
       customer_type { 'private' }
-      personal_tax_code { 'VIVA VASCO' }
+      personal_tax_code { 'RSSMRA85H12D553D' }
     end
   end
 
