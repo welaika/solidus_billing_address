@@ -31,7 +31,7 @@ RSpec.describe Spree::Order, type: :model do
         it 'clones the billing address into a **new** shipping address' do
           order.save!
           expect(order.ship_address).to be_present
-          expect(order.bill_address.id).not_to eq(order.ship_address.id)
+          expect(order.bill_address.id == order.ship_address.id).not_to be(true)
         end
       end
 
@@ -42,8 +42,8 @@ RSpec.describe Spree::Order, type: :model do
         it 'clones the billing address into a **new** shipping address' do
           previous_ship_address_id = ship_address.id
           order.save!
-          expect(order.bill_address.id).not_to eq(order.ship_address.id)
-          expect(order.ship_address.id).not_to eq(previous_ship_address_id)
+          expect(order.bill_address.id == order.ship_address.id).not_to be(true)
+          expect(order.ship_address.id == previous_ship_address_id).not_to be(true)
         end
       end
 
