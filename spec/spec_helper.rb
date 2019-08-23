@@ -20,7 +20,6 @@ require File.expand_path('dummy/config/environment.rb', __dir__)
 require 'rspec/rails'
 require 'capybara/rails'
 require 'database_cleaner'
-require 'selenium-webdriver'
 require 'site_prism'
 require 'ffaker'
 require 'pry-byebug'
