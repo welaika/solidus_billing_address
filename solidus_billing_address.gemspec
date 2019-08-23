@@ -15,6 +15,10 @@ Gem::Specification.new do |s|
   s.author    = 'Fabrizio Monti'
   s.email     = 'fabrizio.monti@welaika.com'
   s.homepage  = 'https://dev.welaika.com'
+  s.metadata = {
+    'changelog_uri' => 'https://github.com/welaika/solidus_billing_address/blob/master/CHANGELOG.md',
+    'source_code_uri' => 'https://github.com/welaika/solidus_billing_address'
+  }
 
   s.files = Dir['{app,config,db,lib}/**/*', 'LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['spec/**/*']
