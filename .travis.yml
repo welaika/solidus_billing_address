@@ -1,7 +1,6 @@
 sudo: false
 cache: bundler
 language: ruby
-dist: trusty
 addons:
   chrome: stable
 bundler_args: --quiet
