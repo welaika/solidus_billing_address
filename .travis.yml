@@ -4,6 +4,9 @@ language: ruby
 addons:
   chrome: stable
 bundler_args: --quiet
+services:
+  - mysql
+  - postgresql
 script:
   - bundle exec rake
 rvm:
