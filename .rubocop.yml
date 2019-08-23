@@ -1,6 +1,7 @@
 require:
   - rubocop-rspec
   - rubocop-performance
+  - rubocop-rails
 
 AllCops:
   Exclude:
@@ -38,6 +39,9 @@ Metrics/MethodLength:
 # Style/ClassAndModuleChildren:
 #   Exclude:
 #     - 'app/models/spree/payment_method/bank_transfer.rb'
+
+Rails:
+  Enabled: true
 
 RSpec/ExampleLength:
   Max: 20

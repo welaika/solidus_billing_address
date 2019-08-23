@@ -34,7 +34,7 @@ module SolidusBillingAddress
         if run_migrations
           run 'bundle exec rake db:migrate'
         else
-          puts 'Skipping rake db:migrate, don\'t forget to run it!'
+          puts 'Skipping rake db:migrate, don\'t forget to run it!' # rubocop:disable Rails/Output
         end
       end
     end
