@@ -4,10 +4,11 @@ module SolidusBillingAddress
   module AddressDecorator
     BILLING_ONLY_ATTRS = %w[customer_type personal_tax_code vat_number billing_email einvoicing_code].freeze
 
-    def self.prepended(base)
-      base.attr_accessor :address_type
+    def self.prepended(base) # rubocop:disable Metrics/MethodLength
+      base.before_validation :normalize_vat_number
+      base.before_validation :normalize_personal_tax_code
 
-      base.validates :last_name, presence: true # NOTE: solidus does not require its presence!
+      base.validates :last_name, presence: true # NOTE: solidus does not require its presence, but we do!
 
       base.validates :vat_number, valvat: true, allow_blank: true
       base.validates :vat_number, presence: true, if: :vat_number_required?
@@ -71,6 +72,19 @@ module SolidusBillingAddress
 
     def italian_personal_tax_code_format_required?
       personal_tax_code_required? && italian?
+    end
+
+    def normalize_vat_number
+      return if vat_number.blank?
+
+      self.vat_number = vat_number.tr(' ', '').upcase
+      self.vat_number = "IT#{vat_number}" if italian? && vat_number.match?(/\A[0-9]{11}\z/)
+    end
+
+    def normalize_personal_tax_code
+      return if personal_tax_code.blank?
+
+      self.personal_tax_code = personal_tax_code.tr(' ', '').upcase
     end
 
     Spree::Address.prepend self
