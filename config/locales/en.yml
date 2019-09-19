@@ -4,14 +4,28 @@
 en:
   spree:
     customer_type:
-      private: 'Private'
       business: 'Business'
+      private: 'Private'
 
   activerecord:
     attributes:
-      spree/address:
-        personal_tax_code: 'Personal tax code'
-        customer_type: 'Customer type'
-        vat_number: 'VAT number'
+      spree/address: &spree_address_attributes
         billing_email: 'Billing email'
+        customer_type: 'Customer type'
         einvoicing_code: 'E-Invoicing code'
+        personal_tax_code: 'Personal tax code'
+        vat_number: 'VAT number'
+      spree/order/bill_address:
+        <<: *spree_address_attributes
+      spree/order/ship_address:
+        <<: *spree_address_attributes
+    errors:
+      models:
+        spree/address:
+          attributes:
+            billing_email:
+              blank: 'cannot be blank'
+            einvoicing_code:
+              blank: 'cannot be blank'
+            personal_tax_code:
+              invalid: 'is invalid'

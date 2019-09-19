@@ -4,14 +4,28 @@
 it:
   spree:
     customer_type:
-      private: 'Privato'
       business: 'Business'
+      private: 'Privato'
 
   activerecord:
     attributes:
-      spree/address:
-        personal_tax_code: 'Codice fiscale'
-        customer_type: 'Tipo di cliente'
-        vat_number: 'Partita IVA'
+      spree/address: &spree_address_attributes
         billing_email: 'Email PEC'
+        customer_type: 'Tipo di cliente'
         einvoicing_code: 'Codice SDI (fatturazione elettr.)'
+        personal_tax_code: 'Codice fiscale'
+        vat_number: 'Partita IVA'
+      spree/order/bill_address:
+        <<: *spree_address_attributes
+      spree/order/ship_address:
+        <<: *spree_address_attributes
+    errors:
+      models:
+        spree/address:
+          attributes:
+            billing_email:
+              blank: 'o il codice SDI non possono essere lasciati entrambi in bianco'
+            einvoicing_code:
+              blank: 'o la PEC non possono essere lasciati entrambi in bianco'
+            personal_tax_code:
+              invalid: 'non è valido'

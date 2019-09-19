@@ -12,6 +12,9 @@ module SolidusBillingAddress
       base.validates :vat_number, valvat: true, allow_blank: true
       base.validates :vat_number, presence: true, if: :vat_number_required?
 
+      base.validates :personal_tax_code, italian_personal_tax_code: { allow_vat_numbers: ->(a) { a.business_customer? } },
+                                         allow_blank: true,
+                                         if: :italian_personal_tax_code_format_required?
       base.validates :personal_tax_code, presence: true, if: :personal_tax_code_required?
 
       base.validates :billing_email, 'spree/email' => true, allow_blank: true
@@ -43,7 +46,7 @@ module SolidusBillingAddress
     end
 
     def personal_tax_code_required?
-      billing? && private_customer?
+      billing?
     end
 
     def italian?
@@ -64,6 +67,10 @@ module SolidusBillingAddress
 
     def billing_email_required?
       italian_business_customer_billing? && einvoicing_code.blank?
+    end
+
+    def italian_personal_tax_code_format_required?
+      personal_tax_code_required? && italian?
     end
 
     Spree::Address.prepend self

@@ -29,7 +29,8 @@ FactoryBot.modify do
     trait :business_customer do
       customer_type { 'business' }
       vat_number { 'IT10300060018' }
-      billing_email { 'foo@example.com' }
+      personal_tax_code { 'RSSMRA85H12D553D' }
+      billing_email { 'foo@pec.example.com' }
       einvoicing_code { 'SZLUBAI' }
     end
 

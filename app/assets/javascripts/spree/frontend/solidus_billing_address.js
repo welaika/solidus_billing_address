@@ -4,9 +4,6 @@
 
 function toggleAddressFields(customerType) {
   if (customerType === 'business') {
-    $('#order_bill_address_attributes_personal_tax_code').prop('disabled', true);
-    $('#bpersonal_tax_code').hide();
-
     $('#order_bill_address_attributes_vat_number').prop('disabled', false);
     $('#bvat_number').show();
 
@@ -19,9 +16,6 @@ function toggleAddressFields(customerType) {
     $('#order_bill_address_attributes_company').prop('disabled', false);
     $('#bcompany').show();
   } else if (customerType === 'private') {
-    $('#order_bill_address_attributes_personal_tax_code').prop('disabled', false);
-    $('#bpersonal_tax_code').show();
-
     $('#order_bill_address_attributes_vat_number').prop('disabled', true);
     $('#bvat_number').hide();
 

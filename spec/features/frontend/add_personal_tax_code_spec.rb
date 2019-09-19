@@ -45,9 +45,17 @@ RSpec.describe 'Personal tax code for billing address in checkout step', type: :
       address_page.billing_address.business_customer_radio.choose
     end
 
-    it 'does not show personal tax code field' do
+    it 'allows user to fill in the personal tax code field' do
       expect(address_page).to be_displayed
-      expect(address_page.billing_address).not_to have_personal_tax_code_field
+      expect(address_page.billing_address).to have_personal_tax_code_field
+      address_page.billing_address.fill_in_as_private(attributes: { personal_tax_code: 'RSSMRA00A01F839E' })
+      address_page.continue_button.click
+
+      delivery_page = Checkout::DeliveryPage.new
+      expect(delivery_page).to be_displayed
+
+      order = Spree::Order.last
+      expect(order.billing_address.personal_tax_code).to eq('RSSMRA00A01F839E')
     end
   end
 end
