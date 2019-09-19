@@ -6,14 +6,12 @@
     </div>
   <% end %>
 
-  <% if address.billing? %>
-    <div class="invoice">
-      <%= address.personal_tax_code if address.personal_tax_code.present? %> 
-      <%= address.vat_number if address.vat_number.present? %>
-      <%= address.billing_email if address.billing_email.present? %>
-      <%= address.einvoicing_code if address.einvoicing_code.present? %>
-    </div>
-  <% end %>
+  <div class="invoice">
+    <%= address.personal_tax_code if address.personal_tax_code.present? %> 
+    <%= address.vat_number if address.vat_number.present? %>
+    <%= address.billing_email if address.billing_email.present? %>
+    <%= address.einvoicing_code if address.einvoicing_code.present? %>
+  </div>
 
   <div class="adr">
     <div class="street-address">

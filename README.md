@@ -60,6 +60,12 @@ bundle
 DB=postgres bundle exec rake
 ```
 
+You can also test against a specific solidus branch with:
+
+```shell
+SOLIDUS_BRANCH=v2.9 DB=postgres bundle exec rake
+```
+
 When testing your application's integration with this extension you may use its factories.
 Simply add this require statement to your spec_helper:
 
