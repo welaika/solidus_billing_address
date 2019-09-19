@@ -19,6 +19,8 @@
         <% end %>
       </div>
     </div>
+  <% else %>
+    <%= form.hidden_field :customer_type, value: nil %>
   <% end %>
 
   <div class="field field-required" id=<%="#{address_id}firstname" %>>
@@ -58,6 +60,11 @@
       <%= form.label :einvoicing_code, t('activerecord.attributes.spree/address.einvoicing_code') %>
       <%= form.text_field :einvoicing_code, autocomplete: address_type + 'einvoicing_code' %>
     </div>
+  <% else %>
+      <%= form.hidden_field :personal_tax_code, value: nil %>
+      <%= form.hidden_field :vat_number, value: nil%>
+      <%= form.hidden_field :billing_email, value: nil %>
+      <%= form.hidden_field :einvoicing_code, value: nil %>
   <% end %>
 
   <div class="field field-required" id=<%="#{address_id}address1" %>>
