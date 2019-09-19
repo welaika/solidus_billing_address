@@ -3,6 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Spree::Address, type: :model do
+  # rubocop:disable RSpec/NestedGroups
   describe 'validations' do
     subject(:address) { build(:address) }
 
@@ -20,6 +21,47 @@ RSpec.describe Spree::Address, type: :model do
 
         it { is_expected.to validate_presence_of(:vat_number) }
         it { is_expected.not_to validate_presence_of(:personal_tax_code) }
+
+        context 'when the business is in italy' do
+          subject(:address) { build(:bill_address, :business_customer, country: create(:country_it)) }
+
+          context 'when billing_email and einvoicing_code are both blank' do
+            before do
+              address.billing_email = nil
+              address.einvoicing_code = nil
+            end
+
+            it { is_expected.to validate_presence_of(:billing_email) }
+            it { is_expected.to validate_presence_of(:einvoicing_code) }
+          end
+
+          context 'when billing_email is present, but einvoicing_code not' do
+            before do
+              address.billing_email = 'foo@pec.example.com'
+              address.einvoicing_code = nil
+            end
+
+            it { is_expected.to validate_presence_of(:billing_email) }
+            it { is_expected.not_to validate_presence_of(:einvoicing_code) }
+          end
+
+          context 'when einvoicing_code is present, but billing_email not' do
+            before do
+              address.billing_email = nil
+              address.einvoicing_code = 'SZZZXXX'
+            end
+
+            it { is_expected.not_to validate_presence_of(:billing_email) }
+            it { is_expected.to validate_presence_of(:einvoicing_code) }
+          end
+        end
+
+        context 'when business is not in italy' do
+          subject(:address) { build(:bill_address, :business_customer, country: create(:country)) }
+
+          it { is_expected.not_to validate_presence_of(:billing_email) }
+          it { is_expected.not_to validate_presence_of(:einvoicing_code) }
+        end
       end
 
       context 'when address ia a private one' do
@@ -27,6 +69,13 @@ RSpec.describe Spree::Address, type: :model do
 
         it { is_expected.not_to validate_presence_of(:vat_number) }
         it { is_expected.to validate_presence_of(:personal_tax_code) }
+
+        context 'when private is in italy' do
+          subject(:address) { build(:bill_address, :private_customer, country: create(:country_it)) }
+
+          it { is_expected.not_to validate_presence_of(:billing_email) }
+          it { is_expected.not_to validate_presence_of(:einvoicing_code) }
+        end
       end
     end
 
@@ -35,8 +84,11 @@ RSpec.describe Spree::Address, type: :model do
 
       it { is_expected.not_to validate_presence_of(:vat_number) }
       it { is_expected.not_to validate_presence_of(:personal_tax_code) }
+      it { is_expected.not_to validate_presence_of(:billing_email) }
+      it { is_expected.not_to validate_presence_of(:einvoicing_code) }
     end
   end
+  # rubocop:enable RSpec/NestedGroups
 
   describe '::BILLING_ONLY_ATTRS' do
     it 'defines a list of attributes that are relevant for billing address only' do

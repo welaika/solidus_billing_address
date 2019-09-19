@@ -15,6 +15,9 @@ module SolidusBillingAddress
       base.validates :personal_tax_code, presence: true, if: :personal_tax_code_required?
 
       base.validates :billing_email, 'spree/email' => true, allow_blank: true
+      base.validates :billing_email, presence: true, if: :billing_email_required?
+
+      base.validates :einvoicing_code, presence: true, if: :einvoicing_code_required?
     end
 
     def shipping?
@@ -41,6 +44,26 @@ module SolidusBillingAddress
 
     def personal_tax_code_required?
       billing? && private_customer?
+    end
+
+    def italian?
+      country_iso == 'IT'
+    end
+
+    def italian_business_customer?
+      italian? && business_customer?
+    end
+
+    def italian_business_customer_billing?
+      italian_business_customer? && billing?
+    end
+
+    def einvoicing_code_required?
+      italian_business_customer_billing? && billing_email.blank?
+    end
+
+    def billing_email_required?
+      italian_business_customer_billing? && einvoicing_code.blank?
     end
 
     Spree::Address.prepend self
