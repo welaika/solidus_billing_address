@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir['spec/**/*']
 
   s.add_dependency 'solidus_core', '~> 2.8'
-  s.add_dependency 'valvat', '~> 0.7.4'
+  s.add_dependency 'valvat', '~> 0.8.1'
 
   s.add_development_dependency 'capybara', '~> 3.28'
   s.add_development_dependency 'coffee-rails'
