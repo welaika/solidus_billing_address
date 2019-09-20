@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/welaika/solidus_billing_address.svg?branch=master)](https://travis-ci.org/welaika/solidus_billing_address)
 
+Manage italian billing address requirements in Solidus! Mamma mia!
+
 This extension adds some new attributes to billing address form in `solidus_frontend`, like:
 
 * VAT number
@@ -39,10 +41,6 @@ Bundle your dependencies and run the installation generator:
 bundle
 bundle exec rails g solidus_billing_address:install
 ```
-
-**NOTE**: if you have already some addresses in your database, then you should create a migration (or 
-a rake task) to fill in `address_type`. I didn't do this now because I'm using this extension on a new project.
-PR is welcome :)
 
 Testing
 -------

@@ -6,7 +6,7 @@ require 'solidus_billing_address/version'
 Gem::Specification.new do |s|
   s.name        = 'solidus_billing_address'
   s.version     = SolidusBillingAddress::VERSION
-  s.summary     = 'Solidus extension for (italian) billing address requirements'
+  s.summary     = 'Solidus extension for italian billing address requirements'
   s.description = 'Modifies Spree::Address to allow customer to enter VAT Number,' \
                   ' codice fiscale (personal tax code), PEC email and SDI code' \
                   ' (codice fatturazione elettronica)'

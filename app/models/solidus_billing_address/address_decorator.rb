@@ -33,6 +33,8 @@ module SolidusBillingAddress
       address_type == 'shipping'
     end
 
+    # NOTE: actually, a billing address can be also a shipping address because
+    # solidus does not duplicate the records, but it will be ok :)
     def billing?
       address_type == 'billing'
     end
