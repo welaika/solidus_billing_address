@@ -33,6 +33,7 @@ module Checkout
       vat_number_field.set attributes.fetch(:vat_number, 'IT10300060018')
       billing_email_field.set attributes.fetch(:billing_email, FFaker::Internet.email)
       einvoicing_code_field.set attributes.fetch(:einvoicing_code, '0000000')
+      personal_tax_code_field.set attributes.fetch(:personal_tax_code, 'RSSVSC52B07M183C')
     end
 
     def fill_in_basic(attributes: {})

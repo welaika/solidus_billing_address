@@ -53,7 +53,7 @@ RSpec.describe 'Customer type for billing address in checkout step', type: :feat
     it 'shows only fields for business billing address', aggregate_failures: true do
       address_section = address_page.billing_address
 
-      expect(address_section).not_to have_personal_tax_code_field
+      expect(address_section).to have_personal_tax_code_field
       expect(address_section).to have_company_field
       expect(address_section).to have_vat_number_field
       expect(address_section).to have_billing_email_field
