@@ -8,6 +8,7 @@ module SolidusBillingAddress
       base.before_validation :normalize_vat_number
       base.before_validation :normalize_personal_tax_code
       base.before_validation :normalize_einvoicing_code
+      base.before_validation :normalize_billing_email
 
       base.validates :last_name, presence: true # NOTE: solidus does not require its presence, but we do!
 
@@ -99,6 +100,12 @@ module SolidusBillingAddress
       return if einvoicing_code.blank?
 
       self.einvoicing_code = einvoicing_code.tr(' ', '').upcase
+    end
+
+    def normalize_billing_email
+      return if billing_email.blank?
+
+      self.billing_email = billing_email.tr(' ', '').downcase
     end
 
     Spree::Address.prepend self
