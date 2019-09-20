@@ -30,7 +30,7 @@ Capybara.register_driver :headless_chrome do |app|
   )
 end
 
-Capybara.javascript_driver = ENV.fetch('driver', 'headless_chrome').to_sym
+Capybara.javascript_driver = ENV.fetch('DRIVER', 'headless_chrome').to_sym
 Capybara.default_max_wait_time = 4
 
 RSpec.configure do |config|
