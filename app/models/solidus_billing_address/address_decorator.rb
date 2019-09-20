@@ -7,6 +7,7 @@ module SolidusBillingAddress
     def self.prepended(base) # rubocop:disable Metrics/MethodLength
       base.before_validation :normalize_vat_number
       base.before_validation :normalize_personal_tax_code
+      base.before_validation :normalize_einvoicing_code
 
       base.validates :last_name, presence: true # NOTE: solidus does not require its presence, but we do!
 
@@ -21,6 +22,9 @@ module SolidusBillingAddress
       base.validates :billing_email, 'spree/email' => true, allow_blank: true
       base.validates :billing_email, presence: true, if: :billing_email_required?
 
+      base.validates :einvoicing_code, italian_einvoicing_code: true,
+                                       allow_blank: true,
+                                       if: :italian_einvoicing_code_format_required?
       base.validates :einvoicing_code, presence: true, if: :einvoicing_code_required?
     end
 
@@ -74,6 +78,10 @@ module SolidusBillingAddress
       personal_tax_code_required? && italian?
     end
 
+    def italian_einvoicing_code_format_required?
+      einvoicing_code_required? && italian?
+    end
+
     def normalize_vat_number
       return if vat_number.blank?
 
@@ -85,6 +93,12 @@ module SolidusBillingAddress
       return if personal_tax_code.blank?
 
       self.personal_tax_code = personal_tax_code.tr(' ', '').upcase
+    end
+
+    def normalize_einvoicing_code
+      return if einvoicing_code.blank?
+
+      self.einvoicing_code = einvoicing_code.tr(' ', '').upcase
     end
 
     Spree::Address.prepend self

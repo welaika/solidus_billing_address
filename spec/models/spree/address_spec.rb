@@ -22,11 +22,13 @@ RSpec.describe Spree::Address, type: :model do
         it { is_expected.to validate_presence_of(:vat_number) }
         it { is_expected.to validate_presence_of(:personal_tax_code) }
         it { is_expected.to allow_value('whatever').for(:personal_tax_code) }
+        it { is_expected.to allow_value('whatever').for(:einvoicing_code) }
 
         context 'when the business is in italy' do
           subject(:address) { build(:bill_address, :business_customer, country: create(:country_it)) }
 
           it { is_expected.to allow_values('IT10300060018', '10300060018', 'RSSVSC52B07M183C').for(:personal_tax_code) }
+          it { is_expected.to allow_values('SZLUBAI', '0000000', 'FOO1234').for(:einvoicing_code) }
 
           context 'when billing_email and einvoicing_code are both blank' do
             before do
