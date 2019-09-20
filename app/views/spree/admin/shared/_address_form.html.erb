@@ -1,5 +1,7 @@
 <% s_or_b = type.chars.first %>
 
+<%= f.hidden_field :address_type, value: type %>
+
 <div id="<%= type %>" data-hook="address_fields">
   <% if type == 'billing' %>
     <div class="field <%= "#{type}-row" %>">
@@ -17,6 +19,8 @@
         <%= t('spree.customer_type.business') %>
       <% end %>
     </div>
+  <% else %>
+    <%= f.hidden_field :customer_type, value: nil %>
   <% end %>
 
   <div class="field <%= "#{type}-row" %>">
@@ -56,6 +60,11 @@
       <%= f.label :einvoicing_code %>
       <%= f.text_field :einvoicing_code, class: 'fullwidth' %>
     </div>
+  <% else %>
+      <%= f.hidden_field :personal_tax_code, value: nil %>
+      <%= f.hidden_field :vat_number, value: nil%>
+      <%= f.hidden_field :billing_email, value: nil %>
+      <%= f.hidden_field :einvoicing_code, value: nil %>
   <% end %>
 
   <div class="field <%= "#{type}-row" %>">
