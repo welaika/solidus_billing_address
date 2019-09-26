@@ -38,6 +38,10 @@ Spree.ready(function($) {
       toggleAddressFields($customerTypeRadios.filter(':checked').val())
     });
 
+    if ($customerTypeRadios.filter(':checked').length === 0) {
+      $customerTypeRadios.first().prop('checked', true);
+    }
+
     toggleAddressFields($customerTypeRadios.filter(':checked').val())
   }
 });
