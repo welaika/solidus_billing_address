@@ -1,3 +1,7 @@
+0.0.4
+* Remove the default value ('private') for customer_type. The javascript code will now check the first customer_type radio button
+  it finds, if no customer_type is defined
+
 0.0.3
 * Forgot to add a migration to remove address_type default value
 
