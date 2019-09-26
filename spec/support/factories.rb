@@ -7,5 +7,6 @@ FactoryBot.define do
     iso3 { 'ITA' }
     name { 'Italy' }
     numcode { 380 }
+    states_required { true }
   end
 end
