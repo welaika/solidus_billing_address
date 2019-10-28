@@ -8,6 +8,11 @@ ruby '2.6.3'
 branch = ENV.fetch('SOLIDUS_BRANCH', 'master')
 gem 'solidus', github: 'solidusio/solidus', branch: branch
 
+# Temporarily locking sprockets to v3.x
+# see https://github.com/solidusio/solidus/issues/3374
+# and https://github.com/rails/sprockets-rails/issues/369
+gem 'sprockets', '~> 3'
+
 # Provides basic authentication functionality for testing parts of your engine
 gem 'solidus_auth_devise'
 
