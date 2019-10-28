@@ -7,7 +7,7 @@ RSpec.describe Spree::Address, type: :model do
   describe 'validations' do
     subject(:address) { build(:address) }
 
-    it { is_expected.to validate_presence_of(:last_name) }
+    it { is_expected.to validate_presence_of(:lastname) }
 
     it { is_expected.not_to allow_value('NOT A VAT').for(:vat_number) }
     it { is_expected.to allow_values('IT10300060018', '', nil).for(:vat_number) }

@@ -10,7 +10,7 @@ module SolidusBillingAddress
       base.before_validation :normalize_einvoicing_code
       base.before_validation :normalize_billing_email
 
-      base.validates :last_name, presence: true # NOTE: solidus does not require its presence, but we do!
+      base.validates :lastname, presence: true # NOTE: solidus does not require its presence, but we do!
 
       base.validates :vat_number, valvat: true, allow_blank: true
       base.validates :vat_number, presence: true, if: :vat_number_required?
