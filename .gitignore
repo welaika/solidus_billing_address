@@ -14,3 +14,4 @@ pkg
 *.swp
 spec/dummy
 rspec_examples.txt
+/node_modules

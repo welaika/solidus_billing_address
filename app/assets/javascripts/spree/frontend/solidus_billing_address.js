@@ -32,7 +32,7 @@ function toggleAddressFields(customerType) {
 
 Spree.ready(function($) {
   if ($("form#checkout_form_address").is("*")) {
-    $customerTypeRadios = $("input[name='order[bill_address_attributes][customer_type]'][type='radio']")
+    var $customerTypeRadios = $("input[name='order[bill_address_attributes][customer_type]'][type='radio']")
 
     $customerTypeRadios.change(function() {
       toggleAddressFields($customerTypeRadios.filter(':checked').val())
