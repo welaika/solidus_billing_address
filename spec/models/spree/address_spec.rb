@@ -19,6 +19,7 @@ RSpec.describe Spree::Address, type: :model do
       context 'when address is a business one' do
         subject(:address) { build(:bill_address, :business_customer) }
 
+        it { is_expected.to validate_presence_of(:company) }
         it { is_expected.to validate_presence_of(:vat_number) }
         it { is_expected.to validate_presence_of(:personal_tax_code) }
         it { is_expected.to allow_value('whatever').for(:personal_tax_code) }
@@ -72,6 +73,7 @@ RSpec.describe Spree::Address, type: :model do
       context 'when address ia a private one' do
         subject(:address) { build(:bill_address, :private_customer) }
 
+        it { is_expected.not_to validate_presence_of(:company) }
         it { is_expected.not_to validate_presence_of(:vat_number) }
         it { is_expected.to validate_presence_of(:personal_tax_code) }
         it { is_expected.to allow_value('whatever').for(:personal_tax_code) }

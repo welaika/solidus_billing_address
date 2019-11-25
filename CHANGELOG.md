@@ -1,5 +1,7 @@
 0.0.5
 * Change: use `lastname` and not `last_name` as attribute name. `last_name` is kinda of deprecated
+* Fix: remove global variable in javascript
+* Change: `company` presence is now required when address type is billig and the customer is business
 
 0.0.4
 * Remove the default value ('private') for customer_type. The javascript code will now check the first customer_type radio button

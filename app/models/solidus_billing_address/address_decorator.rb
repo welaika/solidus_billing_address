@@ -4,13 +4,14 @@ module SolidusBillingAddress
   module AddressDecorator
     BILLING_ONLY_ATTRS = %w[customer_type personal_tax_code vat_number billing_email einvoicing_code].freeze
 
-    def self.prepended(base) # rubocop:disable Metrics/MethodLength
+    def self.prepended(base) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
       base.before_validation :normalize_vat_number
       base.before_validation :normalize_personal_tax_code
       base.before_validation :normalize_einvoicing_code
       base.before_validation :normalize_billing_email
 
       base.validates :lastname, presence: true # NOTE: solidus does not require its presence, but we do!
+      base.validates :company, presence: true, if: :company_required?
 
       base.validates :vat_number, valvat: true, allow_blank: true
       base.validates :vat_number, presence: true, if: :vat_number_required?
@@ -48,6 +49,10 @@ module SolidusBillingAddress
     end
 
     private
+
+    def company_required?
+      billing? && business_customer?
+    end
 
     def vat_number_required?
       billing? && business_customer?
