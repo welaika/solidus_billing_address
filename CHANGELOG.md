@@ -1,4 +1,7 @@
-0.0.5
+0.0.7
+* Change: define a js function that can be overrided to manage address fields switch
+
+0.0.6
 * Change: use `lastname` and not `last_name` as attribute name. `last_name` is kinda of deprecated
 * Fix: remove global variable in javascript
 * Change: `company` presence is now required when address type is billig and the customer is business
