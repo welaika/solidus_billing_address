@@ -1,6 +1,16 @@
 # Solidus Billing Address
 
 [![Build Status](https://travis-ci.org/welaika/solidus_billing_address.svg?branch=master)](https://travis-ci.org/welaika/solidus_billing_address)
+![unmaintained](https://img.shields.io/badge/status-unmaintained-red)
+
+> ## **⚠️ This repository has been archived and is no longer actively maintained.**
+>
+>
+> ### What this means:
+>
+> - No further updates, bug fixes, or security patches will be provided.
+> - Issues and pull requests will not be addressed.
+> - Use this code at your own risk.
 
 Manage italian billing address requirements in Solidus! Mamma mia!
 
